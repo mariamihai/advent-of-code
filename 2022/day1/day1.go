@@ -54,6 +54,7 @@ func Problem1() {
 	}
 }
 
+// Problem2 find the sum of calories carried by the three most carrying elves
 func Problem2() {
 	file, err := os.Open("./day1/input2.txt")
 	if err != nil {
@@ -67,12 +68,14 @@ func Problem2() {
 		}
 	}(file)
 
-	scanner := bufio.NewScanner(file)
 	var allCalories []int
 	var currentCalories = 0
+
+	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
-		if line == "" {
+
+		if hasCurrentElfFinishedCalculation(line) {
 			allCalories = append(allCalories, currentCalories)
 			currentCalories = 0
 		} else {
@@ -81,15 +84,19 @@ func Problem2() {
 				fmt.Println("Error during conversion")
 				return
 			}
+
 			currentCalories += lineCalories
 		}
 	}
+
 	sort.Ints(allCalories)
 	var total = 0
 	for _, calorie := range allCalories[len(allCalories)-3:] {
 		total += calorie
 	}
-	fmt.Printf("Part 2 - %d\n", total)
+
+	fmt.Printf("Part 2 - SUm of calories for first 3 elves: %d\n", total)
+
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
