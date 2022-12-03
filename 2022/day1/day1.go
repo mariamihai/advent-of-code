@@ -95,7 +95,7 @@ func Problem2() {
 		total += calorie
 	}
 
-	fmt.Printf("Part 2 - SUm of calories for first 3 elves: %d\n", total)
+	fmt.Printf("Part 2 - Sum of calories for first 3 elves: %d\n", total)
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
