@@ -2,15 +2,20 @@ package main
 
 import (
 	"advent-of-code-2022/day1"
+	"advent-of-code-2022/day2"
 	"advent-of-code-2022/day3"
 	"advent-of-code-2022/day4"
 	"fmt"
 )
 
 func main() {
-	fmt.Println("--- Day 1: Calorie Counting ---")
+	fmt.Println("\n--- Day 1: Calorie Counting ---")
 	day1.Problem1()
 	day1.Problem2()
+
+	fmt.Println("\n--- Day 2: Rock Paper Scissors ---")
+	day2.Problem1()
+	day2.Problem2()
 
 	fmt.Println("\n--- Day 3: Rucksack Reorganization ---")
 	day3.Problem1()
