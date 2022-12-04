@@ -1,27 +1,17 @@
 package day1
 
 import (
+	"advent-of-code-2022/util"
 	"bufio"
 	"fmt"
 	"log"
-	"os"
 	"sort"
-	"strconv"
 )
 
 // Problem1 find the maximum calories carried by an elf
 func Problem1() {
-	file, err := os.Open("./day1/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
+	file := util.ReadFile("./day1/input2.txt")
+	defer util.CloseFile()(file)
 
 	var maxCalories = 0
 	var currentCalories = 0
@@ -30,6 +20,7 @@ func Problem1() {
 
 	for scanner.Scan() {
 		line := scanner.Text()
+
 		if hasCurrentElfFinishedCalculation(line) {
 			if currentElfCarriesMore(currentCalories, maxCalories) {
 				maxCalories = currentCalories
@@ -37,18 +28,13 @@ func Problem1() {
 
 			currentCalories = 0
 		} else {
-			// Sum another line to current elf
-			lineCalories, err := strconv.Atoi(line)
-			if err != nil {
-				fmt.Println("Error during conversion")
-				return
-			}
-
-			currentCalories += lineCalories
+			// Sum another line to current elf (sum the line calories)
+			currentCalories += util.StringToInt(line)
 		}
 	}
 
 	fmt.Printf("Part 1 - Maximum calories carried: %d\n", maxCalories)
+
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
@@ -56,17 +42,8 @@ func Problem1() {
 
 // Problem2 find the sum of calories carried by the three most carrying elves
 func Problem2() {
-	file, err := os.Open("./day1/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
+	file := util.ReadFile("./day1/input2.txt")
+	defer util.CloseFile()(file)
 
 	var allCalories []int
 	var currentCalories = 0
@@ -79,13 +56,8 @@ func Problem2() {
 			allCalories = append(allCalories, currentCalories)
 			currentCalories = 0
 		} else {
-			lineCalories, err := strconv.Atoi(line)
-			if err != nil {
-				fmt.Println("Error during conversion")
-				return
-			}
-
-			currentCalories += lineCalories
+			// Sum another line to current elf (sum the line calories)
+			currentCalories += util.StringToInt(line)
 		}
 	}
 

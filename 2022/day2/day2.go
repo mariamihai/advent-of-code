@@ -1,25 +1,16 @@
 package day2
 
 import (
+	"advent-of-code-2022/util"
 	"bufio"
 	"fmt"
 	"log"
-	"os"
 	"strings"
 )
 
 func Problem1() {
-	file, err := os.Open("./day2/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
+	file := util.ReadFile("./day2/input2.txt")
+	defer util.CloseFile()(file)
 
 	totalScore := 0
 
@@ -40,17 +31,8 @@ func Problem1() {
 }
 
 func Problem2() {
-	file, err := os.Open("./day2/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
+	file := util.ReadFile("./day2/input2.txt")
+	defer util.CloseFile()(file)
 
 	totalScore := 0
 

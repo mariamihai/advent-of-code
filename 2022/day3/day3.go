@@ -1,27 +1,18 @@
 package day3
 
 import (
+	"advent-of-code-2022/util"
 	"bufio"
 	"fmt"
 	"github.com/samber/lo"
 	"log"
-	"os"
 	"unicode"
 )
 
 // Problem1 sum priorities for misplaced item types based on value associated with letter
 func Problem1() {
-	file, err := os.Open("./day3/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(dile *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
+	file := util.ReadFile("./day3/input2.txt")
+	defer util.CloseFile()(file)
 
 	sum := 0
 
@@ -48,17 +39,8 @@ func Problem1() {
 
 // Problem2 sum priorities for the groups of three elves
 func Problem2() {
-	file, err := os.Open("./day3/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(dile *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
+	file := util.ReadFile("./day3/input2.txt")
+	defer util.CloseFile()(file)
 
 	sum := 0
 	var elvesValues []string

@@ -1,11 +1,11 @@
 package day4
 
 import (
+	"advent-of-code-2022/util"
 	"bufio"
 	"encoding/json"
 	"fmt"
 	"log"
-	"os"
 	"strconv"
 	"strings"
 )
@@ -18,17 +18,8 @@ type ZoneLimits struct {
 // Problem - find the number of zones contained in another, for each pair
 // AND find the number of zones contained or overlapping in another, for each pair
 func Problem() {
-	file, err := os.Open("./day4/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
+	file := util.ReadFile("./day4/input2.txt")
+	defer util.CloseFile()(file)
 
 	countProblem1 := 0
 	countProblem2 := 0
