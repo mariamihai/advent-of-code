@@ -15,8 +15,9 @@ type ZoneLimits struct {
 	End   int `json:"end"`
 }
 
-// Problem1 - find the number of zones contained in another, for each pair
-func Problem1() {
+// Problem - find the number of zones contained in another, for each pair
+// AND find the number of zones contained or overlapping in another, for each pair
+func Problem() {
 	file, err := os.Open("./day4/input2.txt")
 	if err != nil {
 		log.Fatal(err)
@@ -29,7 +30,8 @@ func Problem1() {
 		}
 	}(file)
 
-	count := 0
+	countProblem1 := 0
+	countProblem2 := 0
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(customSplit())
@@ -43,12 +45,19 @@ func Problem1() {
 			log.Fatal(err)
 		}
 
+		// Problem 1 requirements
 		if isZoneIncluded(zones[0], zones[1]) {
-			count++
+			countProblem1++
+		}
+
+		// Problem 2 requirements (keeping the 2 separate)
+		if isZoneIncluded(zones[0], zones[1]) || isZoneOverlapping(zones[0], zones[1]) {
+			countProblem2++
 		}
 	}
 
-	fmt.Printf("Part 1 - number of pairs with zones included one in another: %d\n", count)
+	fmt.Printf("Part 1 - number of pairs with zones included one in another: %d\n", countProblem1)
+	fmt.Printf("Part 2 - number of pairs with zones included one in another or overlapping: %d\n", countProblem2)
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
@@ -91,45 +100,6 @@ func createCustomData(data string) []byte {
 	}
 
 	return bytes
-}
-
-// Problem2 - find the number of zones contained or overlapping in another, for each pair
-func Problem2() {
-	file, err := os.Open("./day4/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
-
-	count := 0
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(customSplit())
-	for scanner.Scan() {
-		line := scanner.Bytes()
-
-		var zones []ZoneLimits
-		err := json.Unmarshal(line, &zones)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		if isZoneIncluded(zones[0], zones[1]) || isZoneOverlapping(zones[0], zones[1]) {
-			count++
-		}
-	}
-
-	fmt.Printf("Part 2.2 - number of pairs with zones included one in another or overlapping: %d\n", count)
-
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
 }
 
 func generateZoneFromString(zoneAsString string) ZoneLimits {

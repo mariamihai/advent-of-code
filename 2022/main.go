@@ -17,6 +17,5 @@ func main() {
 	day3.Problem2()
 
 	fmt.Println("\n--- Day 4: Camp Cleanup ---")
-	day4.Problem1()
-	day4.Problem2()
+	day4.Problem()
 }
