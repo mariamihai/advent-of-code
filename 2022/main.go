@@ -6,6 +6,7 @@ import (
 	"advent-of-code-2022/day3"
 	"advent-of-code-2022/day4"
 	"advent-of-code-2022/day5"
+	"advent-of-code-2022/day6"
 	"fmt"
 )
 
@@ -28,4 +29,10 @@ func main() {
 	fmt.Println("\n--- Day 5: Supply Stacks ---")
 	day5.Problem1()
 	day5.Problem2()
+
+	fmt.Println("\n--- Day 6: Tuning Trouble ---")
+	fmt.Println("Part 1:")
+	day6.Problem(4)
+	fmt.Println("Part 2:")
+	day6.Problem(14)
 }
