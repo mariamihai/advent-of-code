@@ -25,7 +25,7 @@ func Problem() {
 	countProblem2 := 0
 
 	scanner := bufio.NewScanner(file)
-	scanner.Split(customSplit())
+	scanner.Split(util.CustomSplit(createCustomData()))
 
 	for scanner.Scan() {
 		line := scanner.Bytes()
@@ -55,42 +55,23 @@ func Problem() {
 	}
 }
 
-func customSplit() func(data []byte, atEOF bool) (advance int, token []byte, err error) {
-	return func(data []byte, atEOF bool) (advance int, token []byte, err error) {
-		// Return nothing if at end of file and no data passed
-		if atEOF && len(data) == 0 {
-			return 0, nil, nil
+func createCustomData() func(data string) []byte {
+	return func(data string) []byte {
+		var lineZones []ZoneLimits
+
+		pairZonesAsStrings := strings.Split(data, ",")
+		zone1 := generateZoneFromString(pairZonesAsStrings[0])
+		zone2 := generateZoneFromString(pairZonesAsStrings[1])
+
+		lineZones = append(lineZones, zone1, zone2)
+
+		bytes, err := json.Marshal(lineZones)
+		if err != nil {
+			log.Fatal(err)
 		}
 
-		// Find the index of the input of a newline
-		if i := strings.Index(string(data), "\n"); i >= 0 {
-			return i + 1, createCustomData(string(data[0:i])), nil
-		}
-
-		// If at end of file with data return the data
-		if atEOF {
-			return len(data), createCustomData(string(data)), nil
-		}
-
-		return
+		return bytes
 	}
-}
-
-func createCustomData(data string) []byte {
-	var lineZones []ZoneLimits
-
-	pairZonesAsStrings := strings.Split(data, ",")
-	zone1 := generateZoneFromString(pairZonesAsStrings[0])
-	zone2 := generateZoneFromString(pairZonesAsStrings[1])
-
-	lineZones = append(lineZones, zone1, zone2)
-
-	bytes, err := json.Marshal(lineZones)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return bytes
 }
 
 func generateZoneFromString(zoneAsString string) ZoneLimits {
