@@ -2,6 +2,7 @@ package main
 
 import (
 	"advent-of-code-2022/day1"
+	"advent-of-code-2022/day10"
 	"advent-of-code-2022/day2"
 	"advent-of-code-2022/day3"
 	"advent-of-code-2022/day4"
@@ -35,4 +36,8 @@ func main() {
 	day6.Problem(4)
 	fmt.Println("Part 2:")
 	day6.Problem(14)
+
+	fmt.Println("\n--- Day 10: Cathode-Ray Tube ---")
+	day10.Problem1FirstTry()
+	day10.Problem()
 }
