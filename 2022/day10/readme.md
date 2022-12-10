@@ -1,6 +1,6 @@
 # Day 10: Cathode-Ray Tube
 
-AoC 2022 - [day x](https://adventofcode.com/2022/day/x)
+AoC 2022 - [day 10](https://adventofcode.com/2022/day/10)
 
 ## Part 1
 
