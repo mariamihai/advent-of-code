@@ -14,3 +14,13 @@ func StringToInt(valueAsString string) int {
 
 	return valueAsInt
 }
+
+func StringToInt64(valueAsString string) int64 {
+	valueAsInt, err := strconv.Atoi(valueAsString)
+
+	if err != nil {
+		log.Fatalf("Error during conversion for: %s", valueAsString)
+	}
+
+	return int64(valueAsInt)
+}
