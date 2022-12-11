@@ -3,11 +3,13 @@ package main
 import (
 	"advent-of-code-2022/day1"
 	"advent-of-code-2022/day10"
+	"advent-of-code-2022/day11"
 	"advent-of-code-2022/day2"
 	"advent-of-code-2022/day3"
 	"advent-of-code-2022/day4"
 	"advent-of-code-2022/day5"
 	"advent-of-code-2022/day6"
+	"advent-of-code-2022/day9"
 	"fmt"
 )
 
