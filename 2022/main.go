@@ -39,7 +39,13 @@ func main() {
 	fmt.Println("Part 2:")
 	day6.Problem(14)
 
+	fmt.Println("\n--- Day 9: Rope Bridge ---")
+	day9.Problem1()
+
 	fmt.Println("\n--- Day 10: Cathode-Ray Tube ---")
 	day10.Problem1FirstTry()
 	day10.Problem()
+
+	fmt.Println("\n--- Day 11: Monkey in the Middle ---")
+	day11.Problem()
 }
