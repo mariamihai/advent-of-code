@@ -13,9 +13,9 @@ import (
 
 type monkeyData struct {
 	nr             int
-	startingItems  []int64
-	operation      func(old int64) int64
-	divisibleBy    int64
+	startingItems  []int
+	operation      func(old int) int
+	divisibleBy    int
 	ifTrue         int
 	ifFalse        int
 	inspectedItems int
@@ -23,7 +23,7 @@ type monkeyData struct {
 
 func Problem1() func() {
 	return func() {
-		file := util.ReadFile("./day11/input1.txt")
+		file := util.ReadFile("./day11/input2.txt") // test input
 		defer util.CloseFile()(file)
 
 		lines := readAllLines(file)
@@ -35,7 +35,7 @@ func Problem1() func() {
 
 func Problem2() func() {
 	return func() {
-		file := util.ReadFile("./day11/input1.txt")
+		file := util.ReadFile("./day11/input2.txt") // test input
 		defer util.CloseFile()(file)
 
 		lines := readAllLines(file)
@@ -57,16 +57,31 @@ func readAllLines(file *os.File) []string {
 }
 
 func mapToMonkeys(lines []string) map[int]*monkeyData {
+	// 6 lines per monkey + an empty one
+	numberOfLinesPerMonkey := 7
+	//Monkey 0:
+	monkeyLine := func(lines []string, i int) string { return lines[i] }
+	//  Starting items: 79, 98
+	startingItemsLine := func(lines []string, i int) string { return lines[i+1] }
+	//  Operation: new = old * 19
+	operationLine := func(lines []string, i int) string { return lines[i+2] }
+	//  Test: divisible by 23
+	divisionLine := func(lines []string, i int) string { return lines[i+3] }
+	//    If true: throw to monkey 2
+	trueLine := func(lines []string, i int) string { return lines[i+4] }
+	//    If false: throw to monkey 3
+	falseLine := func(lines []string, i int) string { return lines[i+5] }
+
 	monkeys := make(map[int]*monkeyData)
 
-	for i := 0; i < len(lines); i += 7 {
+	for i := 0; i < len(lines); i += numberOfLinesPerMonkey {
 		monkey := &monkeyData{
-			nr:            findMonkeyNumber(lines[i]),
-			startingItems: findStartingItems(lines[i+1]),
-			operation:     findOperation(lines[i+2]),
-			divisibleBy:   findDivisibleBy(lines[i+3]),
-			ifTrue:        findIfTrue(lines[i+4]),
-			ifFalse:       findIfFalse(lines[i+5]),
+			nr:            findMonkeyNumber(monkeyLine(lines, i)),
+			startingItems: findStartingItems(startingItemsLine(lines, i)),
+			operation:     findOperation(operationLine(lines, i)),
+			divisibleBy:   findDivisibleBy(divisionLine(lines, i)),
+			ifTrue:        findIfTrue(trueLine(lines, i)),
+			ifFalse:       findIfFalse(falseLine(lines, i)),
 		}
 
 		monkeys[monkey.nr] = monkey
@@ -82,42 +97,42 @@ func findMonkeyNumber(line string) int {
 	return util.StringToInt(match[1])
 }
 
-func findStartingItems(line string) []int64 {
+func findStartingItems(line string) []int {
 	items := strings.Split(line, "  Starting items: ")[1]
 
-	return lo.Map[string, int64](strings.Split(items, ", "), func(x string, _ int) int64 {
-		return util.StringToInt64(x)
+	return lo.Map[string, int](strings.Split(items, ", "), func(x string, _ int) int {
+		return util.StringToInt(x)
 	})
 }
 
-func findOperation(line string) func(old int64) int64 {
+func findOperation(line string) func(old int) int {
 	op := strings.Split(strings.Split(line, "  Operation: new = old ")[1], " ")
 
 	withOld := false
-	var value int64
+	var value int
 	if op[1] == "old" {
 		withOld = true
 	} else {
-		value = util.StringToInt64(op[1])
+		value = util.StringToInt(op[1])
 	}
 
 	switch op[0] {
 	case "+":
-		return func(old int64) int64 {
+		return func(old int) int {
 			if withOld {
 				return old + old
 			}
 			return old + value
 		}
 	case "-":
-		return func(old int64) int64 {
+		return func(old int) int {
 			if withOld {
 				return old - old
 			}
 			return old - value
 		}
 	case "*":
-		return func(old int64) int64 {
+		return func(old int) int {
 			if withOld {
 				return old * old
 			}
@@ -125,7 +140,7 @@ func findOperation(line string) func(old int64) int64 {
 		}
 	// "/"
 	default:
-		return func(old int64) int64 {
+		return func(old int) int {
 			if withOld {
 				return old / old
 			}
@@ -134,8 +149,8 @@ func findOperation(line string) func(old int64) int64 {
 	}
 }
 
-func findDivisibleBy(line string) int64 {
-	return util.StringToInt64(strings.Split(line, "  Test: divisible by ")[1])
+func findDivisibleBy(line string) int {
+	return util.StringToInt(strings.Split(line, "  Test: divisible by ")[1])
 }
 
 func findIfTrue(line string) int {
@@ -162,7 +177,7 @@ func inspectPart1(monkeys map[int]*monkeyData) {
 				}
 			}
 
-			monkeys[i].startingItems = []int64{}
+			monkeys[i].startingItems = []int{}
 		}
 	}
 
@@ -194,7 +209,7 @@ func inspectPart2(monkeys map[int]*monkeyData) {
 				}
 			}
 
-			monkeys[i].startingItems = []int64{}
+			monkeys[i].startingItems = []int{}
 		}
 	}
 
@@ -208,18 +223,18 @@ func inspectPart2(monkeys map[int]*monkeyData) {
 	fmt.Println("Part 2 - the monkey business of the two most active monkeys: ", inspectedTimes[ln-1]*inspectedTimes[ln-2])
 }
 
-func isDivisible(item, testDivisible int64) bool {
+func isDivisible(item, testDivisible int) bool {
 	return int(item%testDivisible) == 0
 }
 
 // findWorryLevel - find another way to keep your worry levels manageable (for part 2)
-func findWorryLevel(monkeys map[int]*monkeyData) int64 {
-	var dividingByForAll []int64
+func findWorryLevel(monkeys map[int]*monkeyData) int {
+	var dividingByForAll []int
 	for i := 0; i < len(monkeys); i++ {
 		dividingByForAll = append(dividingByForAll, monkeys[i].divisibleBy)
 	}
 
-	modForAll := lo.Reduce[int64, int64](dividingByForAll, func(agg int64, item int64, _ int) int64 {
+	modForAll := lo.Reduce[int, int](dividingByForAll, func(agg int, item int, _ int) int {
 		return agg * item
 	}, 1)
 
