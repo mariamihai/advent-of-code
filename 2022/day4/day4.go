@@ -16,39 +16,41 @@ type ZoneLimits struct {
 
 // Problem - find the number of zones contained in another, for each pair
 // AND find the number of zones contained or overlapping in another, for each pair
-func Problem() {
-	file := util.ReadFile("./day4/input2.txt")
-	defer util.CloseFile()(file)
+func Problem() func() {
+	return func() {
+		file := util.ReadFile("./day4/input2.txt")
+		defer util.CloseFile()(file)
 
-	countProblem1 := 0
-	countProblem2 := 0
+		countProblem1 := 0
+		countProblem2 := 0
 
-	scanner := bufio.NewScanner(file)
-	scanner.Split(util.CustomSplit(createCustomData()))
+		scanner := bufio.NewScanner(file)
+		scanner.Split(util.CustomSplit(createCustomData()))
 
-	for scanner.Scan() {
-		line := scanner.Bytes()
+		for scanner.Scan() {
+			line := scanner.Bytes()
 
-		var zones []ZoneLimits
-		err := json.Unmarshal(line, &zones)
+			var zones []ZoneLimits
+			err := json.Unmarshal(line, &zones)
+			util.Boom(err)
+
+			// Problem 1 requirements
+			if isZoneIncluded(zones[0], zones[1]) {
+				countProblem1++
+			}
+
+			// Problem 2 requirements (keeping the 2 separate)
+			if isZoneIncluded(zones[0], zones[1]) || isZoneOverlapping(zones[0], zones[1]) {
+				countProblem2++
+			}
+		}
+
+		fmt.Printf("Part 1 - number of pairs with zones included one in another: %d\n", countProblem1)
+		fmt.Printf("Part 2 - number of pairs with zones included one in another or overlapping: %d\n", countProblem2)
+
+		err := scanner.Err()
 		util.Boom(err)
-
-		// Problem 1 requirements
-		if isZoneIncluded(zones[0], zones[1]) {
-			countProblem1++
-		}
-
-		// Problem 2 requirements (keeping the 2 separate)
-		if isZoneIncluded(zones[0], zones[1]) || isZoneOverlapping(zones[0], zones[1]) {
-			countProblem2++
-		}
 	}
-
-	fmt.Printf("Part 1 - number of pairs with zones included one in another: %d\n", countProblem1)
-	fmt.Printf("Part 2 - number of pairs with zones included one in another or overlapping: %d\n", countProblem2)
-
-	err := scanner.Err()
-	util.Boom(err)
 }
 
 func createCustomData() func(data string) []byte {

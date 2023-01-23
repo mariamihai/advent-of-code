@@ -15,35 +15,37 @@ type position struct {
 	Y int `json:"Y"`
 }
 
-func Problem1() {
-	file := util.ReadFile("./day9/input1.txt")
-	defer util.CloseFile()(file)
+func Problem1() func() {
+	return func() {
+		file := util.ReadFile("./day9/input1.txt")
+		defer util.CloseFile()(file)
 
-	// starting position
-	//s := position{X: 0, Y: 0}
-	head := position{X: 0, Y: 0}
-	tail := position{X: 0, Y: 0}
+		// starting position
+		//s := position{X: 0, Y: 0}
+		head := position{X: 0, Y: 0}
+		tail := position{X: 0, Y: 0}
 
-	tailPositions := []position{tail}
+		tailPositions := []position{tail}
 
-	scanner := bufio.NewScanner(file)
-	scanner.Split(util.CustomSplit(createCustomData()))
+		scanner := bufio.NewScanner(file)
+		scanner.Split(util.CustomSplit(createCustomData()))
 
-	for scanner.Scan() {
-		line := scanner.Bytes()
+		for scanner.Scan() {
+			line := scanner.Bytes()
 
-		var linePosition position
-		err := json.Unmarshal(line, &linePosition)
-		util.Boom(err)
+			var linePosition position
+			err := json.Unmarshal(line, &linePosition)
+			util.Boom(err)
 
-		head, tail, positionsFoundSoFar := move(head, tail, linePosition)
-		tailPositions = append(tailPositions, positionsFoundSoFar...)
+			head, tail, positionsFoundSoFar := move(head, tail, linePosition)
+			tailPositions = append(tailPositions, positionsFoundSoFar...)
 
-		fmt.Printf("Head %v ; Tail %v\n", head, tail)
+			fmt.Printf("Head %v ; Tail %v\n", head, tail)
+		}
+
+		fmt.Println(tailPositions)
+		fmt.Printf("Part 1 - number of unique positions: %d\n", len(lo.Uniq[position](tailPositions)))
 	}
-
-	fmt.Println(tailPositions)
-	fmt.Printf("Part 1 - number of unique positions: %d\n", len(lo.Uniq[position](tailPositions)))
 }
 
 func createCustomData() func(data string) []byte {

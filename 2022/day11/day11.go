@@ -1,7 +1,7 @@
 package day11
 
 import (
-	"advent-of-code-2022/util"
+	util "advent-of-code-2022/util"
 	"bufio"
 	"fmt"
 	"github.com/samber/lo"
@@ -21,15 +21,28 @@ type monkeyData struct {
 	inspectedItems int
 }
 
-func Problem() {
-	file := util.ReadFile("./day11/input1.txt")
-	defer util.CloseFile()(file)
+func Problem1() func() {
+	return func() {
+		file := util.ReadFile("./day11/input1.txt")
+		defer util.CloseFile()(file)
 
-	lines := readAllLines(file)
-	monkeys := mapToMonkeys(lines)
+		lines := readAllLines(file)
+		monkeys := mapToMonkeys(lines)
 
-	inspectPart1(monkeys)
-	inspectPart2(monkeys)
+		inspectPart1(monkeys)
+	}
+}
+
+func Problem2() func() {
+	return func() {
+		file := util.ReadFile("./day11/input1.txt")
+		defer util.CloseFile()(file)
+
+		lines := readAllLines(file)
+		monkeys := mapToMonkeys(lines)
+
+		inspectPart2(monkeys)
+	}
 }
 
 func readAllLines(file *os.File) []string {

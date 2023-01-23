@@ -9,65 +9,69 @@ import (
 )
 
 // Problem1 sum priorities for misplaced item types based on value associated with letter
-func Problem1() {
-	file := util.ReadFile("./day3/input2.txt")
-	defer util.CloseFile()(file)
+func Problem1() func() {
+	return func() {
+		file := util.ReadFile("./day3/input2.txt")
+		defer util.CloseFile()(file)
 
-	sum := 0
+		sum := 0
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			line := scanner.Text()
 
-		firstHalf := line[:len(line)/2]
-		secondHalf := line[len(line)/2:]
+			firstHalf := line[:len(line)/2]
+			secondHalf := line[len(line)/2:]
 
-		// Get the common character between the 2 halves
-		// There is only one character common to both
-		commonCharacters := lo.Uniq[rune](lo.Intersect[rune]([]rune(firstHalf), []rune(secondHalf)))
+			// Get the common character between the 2 halves
+			// There is only one character common to both
+			commonCharacters := lo.Uniq[rune](lo.Intersect[rune]([]rune(firstHalf), []rune(secondHalf)))
 
-		sum += convertRuneToInt(commonCharacters[0])
+			sum += convertRuneToInt(commonCharacters[0])
+		}
+
+		fmt.Printf("Part 1 - the sum of the priorities of the item types that appear in both compartments of each rucksack: %d\n", sum)
+
+		err := scanner.Err()
+		util.Boom(err)
 	}
-
-	fmt.Printf("Part 1 - the sum of the priorities of the item types that appear in both compartments of each rucksack: %d\n", sum)
-
-	err := scanner.Err()
-	util.Boom(err)
 }
 
 // Problem2 sum priorities for the groups of three elves
-func Problem2() {
-	file := util.ReadFile("./day3/input2.txt")
-	defer util.CloseFile()(file)
+func Problem2() func() {
+	return func() {
+		file := util.ReadFile("./day3/input2.txt")
+		defer util.CloseFile()(file)
 
-	sum := 0
-	var elvesValues []string
+		sum := 0
+		var elvesValues []string
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
-		elvesValues = append(elvesValues, line)
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			line := scanner.Text()
+			elvesValues = append(elvesValues, line)
 
-		if len(elvesValues) == 3 {
-			// Find the common characters between first and second backpacks
-			// and between the second and the third one
-			firstTwoCommonCharactes := lo.Intersect[rune]([]rune(elvesValues[0]), []rune(elvesValues[1]))
-			lastTwoCommonCharactes := lo.Intersect[rune]([]rune(elvesValues[1]), []rune(elvesValues[2]))
+			if len(elvesValues) == 3 {
+				// Find the common characters between first and second backpacks
+				// and between the second and the third one
+				firstTwoCommonCharactes := lo.Intersect[rune]([]rune(elvesValues[0]), []rune(elvesValues[1]))
+				lastTwoCommonCharactes := lo.Intersect[rune]([]rune(elvesValues[1]), []rune(elvesValues[2]))
 
-			// Get the common character against all three backpacks
-			commonAgainstAllThree := lo.Uniq[rune](lo.Intersect[rune](firstTwoCommonCharactes, lastTwoCommonCharactes))
+				// Get the common character against all three backpacks
+				commonAgainstAllThree := lo.Uniq[rune](lo.Intersect[rune](firstTwoCommonCharactes, lastTwoCommonCharactes))
 
-			sum += convertRuneToInt(commonAgainstAllThree[0])
+				sum += convertRuneToInt(commonAgainstAllThree[0])
 
-			// Keep the underlying array
-			elvesValues = elvesValues[:0]
+				// Keep the underlying array
+				elvesValues = elvesValues[:0]
+			}
 		}
+
+		fmt.Printf("Part 2 - the sum of the priorities for 3 elves: %d\n", sum)
+
+		err := scanner.Err()
+		util.Boom(err)
 	}
-
-	fmt.Printf("Part 2 - the sum of the priorities for 3 elves: %d\n", sum)
-
-	err := scanner.Err()
-	util.Boom(err)
 }
 
 func convertRuneToInt(ch rune) int {

@@ -50,36 +50,38 @@ func Problem1FirstTry() {
 }
 
 // Problem - save each step's registry value; the solutions for both parts
-func Problem() {
-	file := util.ReadFile("./day10/input3.txt")
-	defer util.CloseFile()(file)
+func Problem() func() {
+	return func() {
+		file := util.ReadFile("./day10/input3.txt")
+		defer util.CloseFile()(file)
 
-	// Starting with 1 in the registry
-	registryValue := 1
+		// Starting with 1 in the registry
+		registryValue := 1
 
-	// The registry for each cycle
-	var registrySteps []int
+		// The registry for each cycle
+		var registrySteps []int
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			line := scanner.Text()
 
-		if ok := isNoopInstruction(line); ok {
-			registrySteps = append(registrySteps, registryValue)
+			if ok := isNoopInstruction(line); ok {
+				registrySteps = append(registrySteps, registryValue)
+			}
+
+			if ok := isAddXInstruction(line); ok {
+				// Add the registryValue for each of the 2 cycle steps
+				registrySteps = append(registrySteps, registryValue, registryValue)
+
+				registryValue += addToRegistry(line)
+			}
 		}
 
-		if ok := isAddXInstruction(line); ok {
-			// Add the registryValue for each of the 2 cycle steps
-			registrySteps = append(registrySteps, registryValue, registryValue)
+		fmt.Printf("Part 1 - total sum of the six signal strengths (second way): %d\n", sumSignalStrengths(registrySteps))
 
-			registryValue += addToRegistry(line)
-		}
+		fmt.Print("\nPart 2: ")
+		drawing(registrySteps)
 	}
-
-	fmt.Printf("Part 1 - total sum of the six signal strengths (second way): %d\n", sumSignalStrengths(registrySteps))
-
-	fmt.Print("\nPart 2: ")
-	drawing(registrySteps)
 }
 
 func isNoopInstruction(line string) bool {

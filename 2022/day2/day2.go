@@ -7,46 +7,50 @@ import (
 	"strings"
 )
 
-func Problem1() {
-	file := util.ReadFile("./day2/input2.txt")
-	defer util.CloseFile()(file)
+func Problem1() func() {
+	return func() {
+		file := util.ReadFile("./day2/input2.txt")
+		defer util.CloseFile()(file)
 
-	totalScore := 0
+		totalScore := 0
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			line := scanner.Text()
 
-		playValues := strings.Split(line, " ")
+			playValues := strings.Split(line, " ")
 
-		totalScore += scoreForShape(playValues[1]) + scoreForOutcome(mapEnemyShape(playValues[0]), playValues[1])
+			totalScore += scoreForShape(playValues[1]) + scoreForOutcome(mapEnemyShape(playValues[0]), playValues[1])
+		}
+
+		fmt.Printf("Part 1 - Total score: %d\n", totalScore)
+
+		err := scanner.Err()
+		util.Boom(err)
 	}
-
-	fmt.Printf("Part 1 - Total score: %d\n", totalScore)
-
-	err := scanner.Err()
-	util.Boom(err)
 }
 
-func Problem2() {
-	file := util.ReadFile("./day2/input2.txt")
-	defer util.CloseFile()(file)
+func Problem2() func() {
+	return func() {
+		file := util.ReadFile("./day2/input2.txt")
+		defer util.CloseFile()(file)
 
-	totalScore := 0
+		totalScore := 0
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			line := scanner.Text()
 
-		playValues := strings.Split(line, " ")
+			playValues := strings.Split(line, " ")
 
-		totalScore += scoreWithStrategy(mapEnemyShape(playValues[0]), playValues[1])
+			totalScore += scoreWithStrategy(mapEnemyShape(playValues[0]), playValues[1])
+		}
+
+		fmt.Printf("Part 2 - Total score with strategy: %d\n", totalScore)
+
+		err := scanner.Err()
+		util.Boom(err)
 	}
-
-	fmt.Printf("Part 2 - Total score with strategy: %d\n", totalScore)
-
-	err := scanner.Err()
-	util.Boom(err)
 }
 
 func scoreForShape(shape string) int {

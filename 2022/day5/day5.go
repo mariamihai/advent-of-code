@@ -13,20 +13,24 @@ type command struct {
 	endLine   int // the stack where they end up in
 }
 
-func Problem1() {
-	stackCrates, commands := processInputData()
+func Problem1() func() {
+	return func() {
+		stackCrates, commands := processInputData()
 
-	stacksAfterMove := moveCrates(stackCrates, commands)
+		stacksAfterMove := moveCrates(stackCrates, commands)
 
-	fmt.Println(getFinalResult(stacksAfterMove))
+		fmt.Println(getFinalResult(stacksAfterMove))
+	}
 }
 
-func Problem2() {
-	stackCrates, commands := processInputData()
+func Problem2() func() {
+	return func() {
+		stackCrates, commands := processInputData()
 
-	stacksAfterMove := moveCrates2(stackCrates, commands)
+		stacksAfterMove := moveCrates2(stackCrates, commands)
 
-	fmt.Println(getFinalResult(stacksAfterMove))
+		fmt.Println(getFinalResult(stacksAfterMove))
+	}
 }
 
 func processInputData() (map[int][]string, []command) {
