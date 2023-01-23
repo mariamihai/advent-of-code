@@ -23,7 +23,7 @@ type monkeyData struct {
 
 func Problem1() func() {
 	return func() {
-		file := util.ReadFile("./day11/input2.txt") // test input
+		file := util.ReadFile("./day11/input2.txt")
 		defer util.CloseFile()(file)
 
 		lines := readAllLines(file)
@@ -35,7 +35,7 @@ func Problem1() func() {
 
 func Problem2() func() {
 	return func() {
-		file := util.ReadFile("./day11/input2.txt") // test input
+		file := util.ReadFile("./day11/input2.txt")
 		defer util.CloseFile()(file)
 
 		lines := readAllLines(file)
@@ -162,18 +162,23 @@ func findIfFalse(line string) int {
 }
 
 func inspectPart1(monkeys map[int]*monkeyData) {
+	throwToTrueMonkey := func(i int) int { return monkeys[i].ifTrue }
+	throwToFalseMonkey := func(i int) int { return monkeys[i].ifFalse }
+	appendedItems := func(throwToMonkey, item int) []int { return append(monkeys[throwToMonkey].startingItems, item) }
+
 	for round := 1; round <= 20; round++ {
 		for i := 0; i < len(monkeys); i++ {
 			itemsToCheck := monkeys[i].startingItems
 			monkeys[i].inspectedItems += len(itemsToCheck)
 
 			for _, item := range itemsToCheck {
+				// Check worry level
 				item = monkeys[i].operation(item) / 3
 
 				if isDivisible(item, monkeys[i].divisibleBy) {
-					monkeys[monkeys[i].ifTrue].startingItems = append(monkeys[monkeys[i].ifTrue].startingItems, item)
+					monkeys[throwToTrueMonkey(i)].startingItems = appendedItems(throwToTrueMonkey(i), item)
 				} else {
-					monkeys[monkeys[i].ifFalse].startingItems = append(monkeys[monkeys[i].ifFalse].startingItems, item)
+					monkeys[throwToFalseMonkey(i)].startingItems = appendedItems(throwToFalseMonkey(i), item)
 				}
 			}
 
