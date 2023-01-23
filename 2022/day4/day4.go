@@ -5,7 +5,6 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
-	"log"
 	"strconv"
 	"strings"
 )
@@ -32,9 +31,7 @@ func Problem() {
 
 		var zones []ZoneLimits
 		err := json.Unmarshal(line, &zones)
-		if err != nil {
-			log.Fatal(err)
-		}
+		util.Boom(err)
 
 		// Problem 1 requirements
 		if isZoneIncluded(zones[0], zones[1]) {
@@ -50,9 +47,8 @@ func Problem() {
 	fmt.Printf("Part 1 - number of pairs with zones included one in another: %d\n", countProblem1)
 	fmt.Printf("Part 2 - number of pairs with zones included one in another or overlapping: %d\n", countProblem2)
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	err := scanner.Err()
+	util.Boom(err)
 }
 
 func createCustomData() func(data string) []byte {
@@ -66,9 +62,7 @@ func createCustomData() func(data string) []byte {
 		lineZones = append(lineZones, zone1, zone2)
 
 		bytes, err := json.Marshal(lineZones)
-		if err != nil {
-			log.Fatal(err)
-		}
+		util.Boom(err)
 
 		return bytes
 	}
@@ -85,9 +79,7 @@ func generateZoneFromString(zoneAsString string) ZoneLimits {
 
 func stringToInt(valueAsString string) int {
 	valueAsInt, err := strconv.Atoi(valueAsString)
-	if err != nil {
-		log.Fatalf("Error during conversion for: %s", valueAsString)
-	}
+	util.Boom(err)
 
 	return valueAsInt
 }

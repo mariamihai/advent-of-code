@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/samber/lo"
-	"log"
 	"math"
 	"strings"
 )
@@ -35,10 +34,7 @@ func Problem1() {
 
 		var linePosition position
 		err := json.Unmarshal(line, &linePosition)
-		if err != nil {
-			log.Fatal(err)
-		}
-		//fmt.Println("\n Line: ", linePosition)
+		util.Boom(err)
 
 		head, tail, positionsFoundSoFar := move(head, tail, linePosition)
 		tailPositions = append(tailPositions, positionsFoundSoFar...)
@@ -58,9 +54,7 @@ func createCustomData() func(data string) []byte {
 		stepPosition := getNewPosition(splittedLine[0], number)
 
 		bytes, err := json.Marshal(stepPosition)
-		if err != nil {
-			log.Fatal(err)
-		}
+		util.Boom(err)
 
 		return bytes
 	}

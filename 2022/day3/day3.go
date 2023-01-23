@@ -5,7 +5,6 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/samber/lo"
-	"log"
 	"unicode"
 )
 
@@ -32,9 +31,8 @@ func Problem1() {
 
 	fmt.Printf("Part 1 - the sum of the priorities of the item types that appear in both compartments of each rucksack: %d\n", sum)
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	err := scanner.Err()
+	util.Boom(err)
 }
 
 // Problem2 sum priorities for the groups of three elves
@@ -68,9 +66,8 @@ func Problem2() {
 
 	fmt.Printf("Part 2 - the sum of the priorities for 3 elves: %d\n", sum)
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	err := scanner.Err()
+	util.Boom(err)
 }
 
 func convertRuneToInt(ch rune) int {

@@ -4,7 +4,6 @@ import (
 	"advent-of-code-2022/util"
 	"bufio"
 	"fmt"
-	"log"
 	"strings"
 )
 
@@ -25,9 +24,8 @@ func Problem1() {
 
 	fmt.Printf("Part 1 - Total score: %d\n", totalScore)
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	err := scanner.Err()
+	util.Boom(err)
 }
 
 func Problem2() {
@@ -47,9 +45,8 @@ func Problem2() {
 
 	fmt.Printf("Part 2 - Total score with strategy: %d\n", totalScore)
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	err := scanner.Err()
+	util.Boom(err)
 }
 
 func scoreForShape(shape string) int {

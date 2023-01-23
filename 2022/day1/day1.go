@@ -4,7 +4,6 @@ import (
 	"advent-of-code-2022/util"
 	"bufio"
 	"fmt"
-	"log"
 	"sort"
 )
 
@@ -35,9 +34,8 @@ func Problem1() {
 
 	fmt.Printf("Part 1 - Maximum calories carried: %d\n", maxCalories)
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	err := scanner.Err()
+	util.Boom(err)
 }
 
 // Problem2 find the sum of calories carried by the three most carrying elves
@@ -69,9 +67,8 @@ func Problem2() {
 
 	fmt.Printf("Part 2 - Sum of calories for first 3 elves: %d\n", total)
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	err := scanner.Err()
+	util.Boom(err)
 }
 
 // hasCurrentElfFinishedCalculation current line is an empty one separating two elves notes

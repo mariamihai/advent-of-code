@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/samber/lo"
-	"log"
 	"strings"
 )
 
@@ -27,9 +26,7 @@ func Problem1() {
 		line := scanner.Bytes()
 
 		err := json.Unmarshal(line, &row)
-		if err != nil {
-			log.Fatal(err)
-		}
+		util.Boom(err)
 
 		rows = append(rows, row)
 	}
@@ -45,9 +42,7 @@ func createCustomData() func(data string) []byte {
 		})
 
 		bytes, err := json.Marshal(mappedToInt)
-		if err != nil {
-			log.Fatal(err)
-		}
+		util.Boom(err)
 
 		return bytes
 	}
