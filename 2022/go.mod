@@ -1,7 +1,7 @@
-module advent-of-code-2022
+module github.com/mariamihai/advent-of-code/2022
 
-go 1.19
+go 1.21.4
 
-require github.com/samber/lo v1.36.0
+require github.com/samber/lo v1.38.1
 
 require golang.org/x/exp v0.0.0-20220303212507-bbda1eaf7a17 // indirect

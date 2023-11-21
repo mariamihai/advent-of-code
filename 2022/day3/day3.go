@@ -1,9 +1,9 @@
 package day3
 
 import (
-	"advent-of-code-2022/util"
 	"bufio"
 	"fmt"
+	"github.com/mariamihai/advent-of-code/util"
 	"github.com/samber/lo"
 	"unicode"
 )
