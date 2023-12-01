@@ -20,7 +20,7 @@ func TestProblem1(t *testing.T) {
 		{
 			description: "Should validate PROBLEM 1 (linear) against provided INPUT",
 			filename:    "input1.txt",
-			function:    Problem1Concurrent,
+			function:    Problem1,
 			expected:    54916,
 		},
 		{
@@ -32,7 +32,7 @@ func TestProblem1(t *testing.T) {
 		{
 			description: "Should validate PROBLEM 1 (concurrent) against provided INPUT",
 			filename:    "input1.txt",
-			function:    Problem1Concurrent2,
+			function:    Problem1Concurrent,
 			expected:    54916,
 		},
 		{
@@ -44,14 +44,14 @@ func TestProblem1(t *testing.T) {
 		{
 			description: "Should validate PROBLEM 1 (concurrent with semaphore) against provided INPUT",
 			filename:    "input1.txt",
-			function:    Problem1,
+			function:    Problem1Concurrent2,
 			expected:    54916,
 		},
 	}
 	for _, test := range testCases {
 		t.Run(test.description, func(t *testing.T) {
 			if actual := test.function(test.filename); actual != test.expected {
-				t.Errorf("problem1() = %v, want %v", actual, test.expected)
+				t.Errorf("result %v, want %v", actual, test.expected)
 			}
 		})
 	}
