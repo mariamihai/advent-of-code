@@ -1,9 +1,9 @@
 package main
 
 import (
-	"advent-of-code-2021/day1"
-	"advent-of-code-2021/day2"
 	"fmt"
+	"github.com/mariamihai/advent-of-code/2021/day1"
+	"github.com/mariamihai/advent-of-code/2021/day2"
 )
 
 func main() {

@@ -1,10 +1,10 @@
 package day4
 
 import (
-	"advent-of-code-2022/util"
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"github.com/mariamihai/advent-of-code/util"
 	"strconv"
 	"strings"
 )

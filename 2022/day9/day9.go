@@ -1,10 +1,10 @@
 package day9
 
 import (
-	"advent-of-code-2022/util"
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"github.com/mariamihai/advent-of-code/util"
 	"github.com/samber/lo"
 	"math"
 	"strings"

@@ -1,9 +1,9 @@
 package day2
 
 import (
-	"advent-of-code-2022/util"
 	"bufio"
 	"fmt"
+	"github.com/mariamihai/advent-of-code/util"
 	"strings"
 )
 
