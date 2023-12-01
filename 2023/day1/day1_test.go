@@ -1,27 +1,56 @@
 package day1
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestProblem1(t *testing.T) {
 	testCases := []struct {
 		description string
 		filename    string
+		function    func(string) int
 		expected    int
 	}{
 		{
-			description: "Should validate PROBLEM 1 against provided EXAMPLE",
+			description: "Should validate PROBLEM 1 (linear) against provided EXAMPLE",
 			filename:    "example1.txt",
+			function:    Problem1,
 			expected:    142,
 		},
 		{
-			description: "Should validate PROBLEM 1 against provided INPUT",
+			description: "Should validate PROBLEM 1 (linear) against provided INPUT",
 			filename:    "input1.txt",
+			function:    Problem1Concurrent,
+			expected:    54916,
+		},
+		{
+			description: "Should validate PROBLEM 1 (concurrent) against provided EXAMPLE",
+			filename:    "example1.txt",
+			function:    Problem1Concurrent,
+			expected:    142,
+		},
+		{
+			description: "Should validate PROBLEM 1 (concurrent) against provided INPUT",
+			filename:    "input1.txt",
+			function:    Problem1Concurrent2,
+			expected:    54916,
+		},
+		{
+			description: "Should validate PROBLEM 1 (concurrent with semaphore) against provided EXAMPLE",
+			filename:    "example1.txt",
+			function:    Problem1Concurrent2,
+			expected:    142,
+		},
+		{
+			description: "Should validate PROBLEM 1 (concurrent with semaphore) against provided INPUT",
+			filename:    "input1.txt",
+			function:    Problem1,
 			expected:    54916,
 		},
 	}
 	for _, test := range testCases {
 		t.Run(test.description, func(t *testing.T) {
-			if actual := Problem1(test.filename); actual != test.expected {
+			if actual := test.function(test.filename); actual != test.expected {
 				t.Errorf("problem1() = %v, want %v", actual, test.expected)
 			}
 		})
