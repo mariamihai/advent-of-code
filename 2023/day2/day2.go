@@ -23,9 +23,6 @@ func Problem1(filename string) int {
 	file := util.ReadFile(filename)
 	defer util.CloseFile()(file)
 
-	maxRedCubes := 12
-	maxGreeenCubes := 13
-	maxBlueCubes := 14
 	var sum int
 
 	scanner := bufio.NewScanner(file)
@@ -41,14 +38,10 @@ func Problem1(filename string) int {
 		validGame := true
 
 		for _, inputSubset := range gameEntry.Subsets {
-			if inputSubset.Red > maxRedCubes ||
-				inputSubset.Green > maxGreeenCubes ||
-				inputSubset.Blue > maxBlueCubes {
+			if isGamePossible(inputSubset.Red, inputSubset.Green, inputSubset.Blue) {
 				validGame = false
 			}
 		}
-
-		//fmt.Printf("[%t] %+v\n", validGame, gameEntry)
 
 		if validGame {
 			sum += gameEntry.Number
@@ -56,6 +49,12 @@ func Problem1(filename string) int {
 	}
 
 	return sum
+}
+
+// isGamePossible checks if subset is valid against maximum values accepted
+// (max red cubes = 12, max green cubes = 13 and max blue cubes = 14)
+func isGamePossible(red, green, blue int) bool {
+	return red > 12 || green > 13 || blue > 14
 }
 
 func Problem2(filename string) int {
@@ -96,38 +95,41 @@ func Problem2(filename string) int {
 	return sum
 }
 
+// createCustomData maps a line to a structure containing a slice of RGB values + the number of the day
+// Eg.: Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 func createCustomData() func(data string) []byte {
 	return func(data string) []byte {
-		split := strings.Split(data, ": ")
+		splitLine := strings.Split(data, ": ")
 
 		var gameEntry Game
-		gameEntry.Number = util.StringToInt(strings.Replace(split[0], "Game ", "", 1))
+		gameEntry.Number = util.StringToInt(strings.Replace(splitLine[0], "Game ", "", 1))
 		gameEntry.Subsets = []Subset{}
 
-		inputSubsets := strings.Split(split[1], "; ")
+		inputSubsets := strings.Split(splitLine[1], "; ")
+
+		calculateColorValue := func(value, color string) int { return util.StringToInt(strings.Replace(value, " "+color, "", 1)) }
 
 		for _, inputSubset := range inputSubsets {
 			values := strings.Split(inputSubset, ", ")
 
 			var redInput, greenInput, blueInput int
 
-			// TODO redo this mess
 			for _, value := range values {
 				if strings.Contains(value, "red") {
-					redInput = util.StringToInt(strings.Replace(value, " red", "", 1))
+					redInput = calculateColorValue(value, "red")
 				}
 				if strings.Contains(value, "green") {
-					greenInput = util.StringToInt(strings.Replace(value, " green", "", 1))
+					greenInput = calculateColorValue(value, "green")
 				}
 				if strings.Contains(value, "blue") {
-					blueInput = util.StringToInt(strings.Replace(value, " blue", "", 1))
+					blueInput = calculateColorValue(value, "blue")
 				}
 			}
 
 			gameEntry.Subsets = append(gameEntry.Subsets, Subset{Red: redInput, Green: greenInput, Blue: blueInput})
 		}
 
-		bytes, err := json.Marshal(&gameEntry)
+		bytes, err := json.Marshal(gameEntry)
 		util.Boom(err)
 
 		return bytes
