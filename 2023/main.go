@@ -29,4 +29,6 @@ func main() {
 	fmt.Println("\n------- Day 3: Gear Ratios -------")
 	fmt.Println("Day 3, problem 1: ", day3.Problem1("./day3/example1.txt"))
 	fmt.Println("Day 3, problem 1: ", day3.Problem1("./day3/input1.txt"))
+	fmt.Println("Day 2, problem 2: ", day3.Problem2("./day3/example1.txt"))
+	fmt.Println("Day 2, problem 2: ", day3.Problem2("./day3/input1.txt"))
 }
