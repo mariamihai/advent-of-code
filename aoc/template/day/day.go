@@ -7,8 +7,8 @@ import (
 	"github.com/mariamihai/advent-of-code/util"
 )
 
-func Problem1() {
-	file := util.ReadFile("./day/input1.txt")
+func Problem1(filename string) int {
+	file := util.ReadFile(filename)
 	defer util.CloseFile()(file)
 
 	scanner := bufio.NewScanner(file)
@@ -17,4 +17,6 @@ func Problem1() {
 
 		fmt.Println(line)
 	}
+
+	return 0
 }
