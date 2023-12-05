@@ -2,10 +2,32 @@ package main
 
 import (
 	"fmt"
-	"github.com/mariamihai/advent-of-code/2023/day3"
+	"github.com/mariamihai/advent-of-code/2023/day5"
+	"time"
 )
 
 func main() {
+	fmt.Println("\n------- Day 5: If You Give A Seed A Fertilizer -------")
+	//fmt.Println("Day 5, problem 1: ", day5.Problem1("./day5/example1.txt"))
+	//fmt.Println("Day 5, problem 1: ", day5.Problem1("./day5/input1.txt"))
+	//fmt.Println("Day 5, problem 2: ", day5.Problem2("./day5/example1.txt"))
+
+	startTime := time.Now()
+	fmt.Println("Day 5, problem 2: ", day5.Problem2("./day5/input1.txt"))
+	fmt.Println("Problem 2: ", time.Since(startTime))
+
+	//fmt.Println("\n------- Day 4: Scratchcards -------")
+	//fmt.Println("Day 4, problem 1: ", day4.Problem1("./day4/input1.txt"))
+	//fmt.Println("Day 4, problem 2: ", day4.Problem2("./day4/input1.txt"))
+
+	//fmt.Println("\n------- Day 3: Gear Ratios -------")
+	//fmt.Println("Day 3, problem 1: ", day3.Problem1("./day3/input1.txt"))
+	//fmt.Println("Day 2, problem 2: ", day3.Problem2("./day3/input1.txt"))
+
+	//fmt.Println("\n------- Day 2: Cube Conundrum -------")
+	//fmt.Println("Day 2, problem 1: ", day2.Problem1("./day2/input1.txt"))
+	//fmt.Println("Day 2, problem 2: ", day2.Problem2("./day2/input2.txt"))
+
 	//fmt.Println("\n------- Day 1: Trebuchet?! -------")
 	//fmt.Println("Day 1, problem 1: ", day1.Problem1("./day1/input1.txt"))
 	//fmt.Println("Day 1, problem 2: ", day1.Problem2("./day1/input2.txt"))
@@ -21,14 +43,4 @@ func main() {
 	//startTime = time.Now()
 	//day1.Problem1Concurrent2("./day1/input1.txt")
 	//fmt.Println("Problem 1 [concurrent solution with semaphore]: ", time.Since(startTime))
-
-	//fmt.Println("\n------- Day 2: Cube Conundrum -------")
-	//fmt.Println("Day 2, problem 1: ", day2.Problem1("./day2/input1.txt"))
-	//fmt.Println("Day 2, problem 2: ", day2.Problem2("./day2/input2.txt"))
-
-	fmt.Println("\n------- Day 3: Gear Ratios -------")
-	fmt.Println("Day 3, problem 1: ", day3.Problem1("./day3/example1.txt"))
-	fmt.Println("Day 3, problem 1: ", day3.Problem1("./day3/input1.txt"))
-	fmt.Println("Day 2, problem 2: ", day3.Problem2("./day3/example1.txt"))
-	fmt.Println("Day 2, problem 2: ", day3.Problem2("./day3/input1.txt"))
 }
