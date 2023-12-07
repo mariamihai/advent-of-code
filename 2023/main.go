@@ -2,19 +2,21 @@ package main
 
 import (
 	"fmt"
-	"github.com/mariamihai/advent-of-code/2023/day5"
-	"time"
+	"github.com/mariamihai/advent-of-code/2023/day6"
 )
 
 func main() {
-	fmt.Println("\n------- Day 5: If You Give A Seed A Fertilizer -------")
+	fmt.Println("\n------- Day 6: Wait For It -------")
+	fmt.Println("Day 6, problem 1: ", day6.Problem1("./day6/example1.txt"))
+	//fmt.Println("Day 6, problem 1: ", day6.Problem1("./day6/input1.txt"))
+	fmt.Println("Day 6, problem 2: ", day6.Problem2("./day6/example1.txt"))
+	//fmt.Println("Day 6, problem 2: ", day6.Problem2("./day6/input1.txt"))
+
+	//fmt.Println("\n------- Day 5: If You Give A Seed A Fertilizer -------")
 	//fmt.Println("Day 5, problem 1: ", day5.Problem1("./day5/example1.txt"))
 	//fmt.Println("Day 5, problem 1: ", day5.Problem1("./day5/input1.txt"))
 	//fmt.Println("Day 5, problem 2: ", day5.Problem2("./day5/example1.txt"))
-
-	startTime := time.Now()
-	fmt.Println("Day 5, problem 2: ", day5.Problem2("./day5/input1.txt"))
-	fmt.Println("Problem 2: ", time.Since(startTime))
+	//fmt.Println("Day 5, problem 2: ", day5.Problem2("./day5/input1.txt"))
 
 	//fmt.Println("\n------- Day 4: Scratchcards -------")
 	//fmt.Println("Day 4, problem 1: ", day4.Problem1("./day4/input1.txt"))
