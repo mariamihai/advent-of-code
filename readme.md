@@ -6,9 +6,10 @@
 
 - [x] Day  1 [problem](https://adventofcode.com/2023/day/1) and [solution](2023/day1)
 - [x] Day  2 [problem](https://adventofcode.com/2023/day/2) and [solution](2023/day2)
-- [x] Day  3 [problem](https://adventofcode.com/2023/day/3) and [solution](2023/day3) (TODO - part 2)
+- [ ] Day  3 [problem](https://adventofcode.com/2023/day/3) and [solution](2023/day3) (TODO - part 2)
 - [x] Day  4 [problem](https://adventofcode.com/2023/day/4) and [solution](2023/day4)
-- [x] Day  5 [problem](https://adventofcode.com/2023/day/5) and [solution](2023/day5) (TODO - part 2)
+- [ ] Day  5 [problem](https://adventofcode.com/2023/day/5) and [solution](2023/day5) (TODO - part 2)
+- [x] Day  6 [problem](https://adventofcode.com/2023/day/6) and [solution](2023/day6)
 
 # 2022
 
