@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"github.com/samber/lo"
 	"math"
-	"regexp"
 	"strconv"
 	"strings"
 
@@ -86,9 +85,8 @@ func processCard(line string) (float64, []int) {
 
 	split = strings.Split(line, "|")
 
-	re := regexp.MustCompile("[0-9]+")
-	winningNumbers := re.FindAllString(split[0], -1)
-	ownNumbers := re.FindAllString(split[1], -1)
+	winningNumbers := util.NumbersAsStringSlice(split[0])
+	ownNumbers := util.NumbersAsStringSlice(split[1])
 
 	intersect := lo.Intersect(winningNumbers, ownNumbers)
 

@@ -1,6 +1,8 @@
 package util
 
 import (
+	"github.com/samber/lo"
+	"regexp"
 	"strconv"
 )
 
@@ -16,4 +18,20 @@ func StringToInt64(valueAsString string) int64 {
 	Boom(err)
 
 	return int64(valueAsInt)
+}
+
+func NumbersAsStringSlice(str string) []string {
+	re := regexp.MustCompile("[0-9]+")
+	return re.FindAllString(str, -1)
+}
+
+func StringToIntSlice(str string) []int {
+	return lo.Map(NumbersAsStringSlice(str), func(x string, index int) int {
+		result, err := strconv.Atoi(x)
+		if err != nil {
+			// Ignore error
+			return 0
+		}
+		return result
+	})
 }

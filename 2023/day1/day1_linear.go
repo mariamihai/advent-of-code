@@ -2,7 +2,6 @@ package day1
 
 import (
 	"bufio"
-	"regexp"
 	"strings"
 
 	"github.com/mariamihai/advent-of-code/util"
@@ -47,8 +46,7 @@ func calibratedValueForLine(line string) int {
 		return 0
 	}
 
-	re := regexp.MustCompile("[0-9]+")
-	numbers := re.FindAllString(line, -1)
+	numbers := util.NumbersAsStringSlice(line)
 
 	noNumbersInLine := len(numbers) == 0
 	if noNumbersInLine {

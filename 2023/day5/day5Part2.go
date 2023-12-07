@@ -50,7 +50,7 @@ func Problem2Messy(filename string) int {
 
 func getSeedsForProblem2(line string) []seedWithRange {
 	line = strings.Replace(line, "seeds:", "", 1)
-	ints := lineToIntSlice(line)
+	ints := util.StringToIntSlice(line)
 
 	seeds := []seedWithRange{}
 	for i := 0; i < len(ints); i = i + 2 {

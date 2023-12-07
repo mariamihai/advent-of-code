@@ -5,8 +5,6 @@ import (
 	"github.com/mariamihai/advent-of-code/util"
 	"github.com/samber/lo"
 	"math"
-	"regexp"
-	"strconv"
 	"strings"
 )
 
@@ -144,11 +142,11 @@ func calculate(seeds []int, mappers map[string][]almanacLine) []int {
 
 func getSeedsForProblem1(line string) []int {
 	line = strings.Replace(line, "seeds:", "", 1)
-	return lineToIntSlice(line)
+	return util.StringToIntSlice(line)
 }
 
 func mapToAlmanacLine(line string) almanacLine {
-	lineInput := lineToIntSlice(line)
+	lineInput := util.StringToIntSlice(line)
 
 	return almanacLine{
 		destination: lineInput[0],
@@ -175,19 +173,4 @@ func mapSeed(seed int, converter []almanacLine) int {
 	}
 
 	return seed
-}
-
-func lineToIntSlice(line string) []int {
-	re := regexp.MustCompile("[0-9]+")
-	seedsAsStrings := re.FindAllString(line, -1)
-
-	seedsAsInts := lo.Map(seedsAsStrings, func(x string, index int) int {
-		result, err := strconv.Atoi(x)
-		if err != nil {
-			return 0
-		}
-		return result
-	})
-
-	return seedsAsInts
 }
