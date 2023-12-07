@@ -65,7 +65,7 @@ func TestProblem2(t *testing.T) {
 	}
 }
 
-func TestIdentifyType(t *testing.T) {
+func TestGetTypeForHandPart1(t *testing.T) {
 	tests := []struct {
 		description string
 		hand        string
@@ -110,8 +110,8 @@ func TestIdentifyType(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.description, func(t *testing.T) {
-			if actual := identifyType(tt.hand); actual != tt.expected {
-				t.Errorf("identifyType() = %v, want %v", actual, tt.expected)
+			if actual := getTypeForHandPart1(tt.hand); actual != tt.expected {
+				t.Errorf("getTypeForHandPart1() = %v, want %v", actual, tt.expected)
 			}
 		})
 	}

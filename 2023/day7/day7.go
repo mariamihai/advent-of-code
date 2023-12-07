@@ -22,27 +22,17 @@ const (
 )
 
 func Problem1(filename string) int {
-	allLines := readInput(filename)
-	allCards := make(map[int][]string)
-
-	for _, line := range allLines {
-		cardType := identifyType(strings.Split(line, " ")[0])
-
-		if allCards[cardType] == nil {
-			allCards[cardType] = []string{line}
-			continue
-		}
-		allCards[cardType] = append(allCards[cardType], line)
-	}
+	allLines := getInput(filename)
+	cardsByType := mapCardsByType(allLines, getTypeForHandPart1)
 
 	var result int
 	cnt := 1
 
 	for i := 0; i <= 6; i++ {
-		allCards[i] = sortCards(allCards[i], sortOrderPart1)
+		cardsByType[i] = sortCards(cardsByType[i], sortOrderPart1)
 
-		for j := 0; j < len(allCards[i]); j++ {
-			bid := util.StringToInt(strings.Split(allCards[i][j], " ")[1])
+		for j := 0; j < len(cardsByType[i]); j++ {
+			bid := util.StringToInt(strings.Split(cardsByType[i][j], " ")[1])
 
 			result += cnt * bid
 			cnt++
@@ -53,27 +43,17 @@ func Problem1(filename string) int {
 }
 
 func Problem2(filename string) int {
-	allLines := readInput(filename)
-	allCards := make(map[int][]string)
-
-	for _, line := range allLines {
-		cardType := identifyTypeForPart2(strings.Split(line, " ")[0])
-
-		if allCards[cardType] == nil {
-			allCards[cardType] = []string{line}
-			continue
-		}
-		allCards[cardType] = append(allCards[cardType], line)
-	}
+	allLines := getInput(filename)
+	cardsByType := mapCardsByType(allLines, getTypeForHandPart2)
 
 	var result int
 	cnt := 1
 
 	for i := 0; i <= 6; i++ {
-		allCards[i] = sortCards(allCards[i], sortOrderPart2)
+		cardsByType[i] = sortCards(cardsByType[i], sortOrderPart2)
 
-		for j := 0; j < len(allCards[i]); j++ {
-			bid := util.StringToInt(strings.Split(allCards[i][j], " ")[1])
+		for j := 0; j < len(cardsByType[i]); j++ {
+			bid := util.StringToInt(strings.Split(cardsByType[i][j], " ")[1])
 			result += cnt * bid
 			cnt++
 		}
@@ -82,7 +62,7 @@ func Problem2(filename string) int {
 	return result
 }
 
-func readInput(filename string) []string {
+func getInput(filename string) []string {
 	file := util.ReadFile(filename)
 	defer util.CloseFile()(file)
 
@@ -97,7 +77,23 @@ func readInput(filename string) []string {
 	return allLines
 }
 
-func identifyType(handAsString string) int {
+func mapCardsByType(allLines []string, getTypeFunc func(string) int) map[int][]string {
+	cardsByType := make(map[int][]string)
+
+	for _, line := range allLines {
+		cardType := getTypeFunc(strings.Split(line, " ")[0])
+
+		if cardsByType[cardType] == nil {
+			cardsByType[cardType] = []string{line}
+			continue
+		}
+		cardsByType[cardType] = append(cardsByType[cardType], line)
+	}
+
+	return cardsByType
+}
+
+func getTypeForHandPart1(handAsString string) int {
 	hand := strings.Split(handAsString, "")
 	uniq := lo.Uniq(hand)
 
@@ -129,11 +125,11 @@ func identifyType(handAsString string) int {
 	}
 }
 
-func identifyTypeForPart2(handAsString string) int {
+func getTypeForHandPart2(handAsString string) int {
 	numberOfJokers := strings.Count(handAsString, "J")
 
 	if numberOfJokers == 0 {
-		return identifyType(handAsString)
+		return getTypeForHandPart1(handAsString)
 	}
 
 	hand := strings.Split(handAsString, "")
