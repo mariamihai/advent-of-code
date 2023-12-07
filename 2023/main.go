@@ -7,9 +7,7 @@ import (
 
 func main() {
 	fmt.Println("\n------- Day 7: Camel Cards -------")
-	//fmt.Println("Day 7, problem 1: ", day7.Problem1("./day7/example1.txt"))
-	//fmt.Println("Day 7, problem 1: ", day7.Problem1("./day7/input1.txt"))
-	//fmt.Println("Day 7, problem 1: ", day7.Problem2("./day7/example1.txt"))
+	fmt.Println("Day 7, problem 1: ", day7.Problem1("./day7/input1.txt"))
 	fmt.Println("Day 7, problem 1: ", day7.Problem2("./day7/input1.txt"))
 
 	//fmt.Println("\n------- Day 6: Wait For It -------")

@@ -6,8 +6,10 @@ import (
 	"github.com/samber/lo"
 	"sort"
 	"strings"
-	"unicode"
 )
+
+const sortOrderPart1 = "23456789TJQKA"
+const sortOrderPart2 = "J23456789TQKA"
 
 const (
 	FiveOfAKind  = 6
@@ -87,7 +89,7 @@ func Problem1(filename string) int {
 	cnt := 1
 
 	for i := 0; i <= 6; i++ {
-		allCards[i] = sortCards(allCards[i])
+		allCards[i] = sortCards(allCards[i], sortOrderPart1)
 
 		for j := 0; j < len(allCards[i]); j++ {
 			bid := util.StringToInt(strings.Split(allCards[i][j], " ")[1])
@@ -100,79 +102,20 @@ func Problem1(filename string) int {
 	return result
 }
 
-func sortCards(lines []string) []string {
+func sortCards(lines []string, sortOrder string) []string {
 	sort.Slice(lines, func(i, j int) bool {
 		card1 := strings.Split(lines[i], " ")[0]
 		card2 := strings.Split(lines[j], " ")[0]
 
 		for i := 0; i < 5; i++ {
-			rune1 := rune(card1[i])
-			rune2 := rune(card2[i])
+			card1 := strings.IndexByte(sortOrder, card1[i])
+			card2 := strings.IndexByte(sortOrder, card2[i])
 
-			string1 := string(card1[i])
-			string2 := string(card2[i])
-
-			isDigit1 := unicode.IsDigit(rune1)
-			isDigit2 := unicode.IsDigit(rune2)
-
-			if rune1 == rune2 {
+			if card1 == card2 {
 				continue
 			}
 
-			if !isDigit1 && isDigit2 {
-				return false
-			}
-			if isDigit1 && !isDigit2 {
-				return true
-			}
-
-			if isDigit1 && isDigit2 {
-				if util.StringToInt(string1) == util.StringToInt(string2) {
-					continue
-				}
-				return util.StringToInt(string1) < util.StringToInt(string2)
-			}
-
-			if !isDigit1 && !isDigit2 {
-				if rune1 == rune2 {
-					continue
-				}
-
-				// A, K, Q, J, T
-				// Compare A with anything else
-				if rune1 == 'A' && rune2 != 'A' {
-					return false
-				}
-				if rune1 != 'A' && rune2 == 'A' {
-					return true
-				}
-
-				// Compare T with anything else
-				if rune1 == 'T' && rune2 != 'T' {
-					return true
-				}
-				if rune1 != 'T' && rune2 == 'T' {
-					return false
-				}
-
-				// Compare K with anything else
-				if rune1 == 'K' {
-					return false
-				}
-				if rune2 == 'K' {
-					return true
-				}
-
-				// Compare Q with anything else
-				if rune1 == 'Q' {
-					return false
-				}
-				if rune2 == 'Q' {
-					return true
-				}
-
-				// Remaining J against T, already done
-			}
+			return card1 < card2
 		}
 		return false // equal
 	})

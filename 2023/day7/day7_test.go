@@ -121,56 +121,41 @@ func TestSortCards(t *testing.T) {
 	tests := []struct {
 		description string
 		lines       []string
+		sortOrder   string
 		expected    []string
 	}{
 		{
 			description: "Test 1",
 			lines:       []string{"KK677", "KTJJT"},
+			sortOrder:   sortOrderPart1,
 			expected:    []string{"KTJJT", "KK677"},
 		},
 		{
 			description: "Test 2",
 			lines:       []string{"QQQJA", "T55J5"},
+			sortOrder:   sortOrderPart1,
 			expected:    []string{"T55J5", "QQQJA"},
 		},
 		{
 			description: "Test 3",
 			lines:       []string{"23456", "12345"},
+			sortOrder:   sortOrderPart1,
 			expected:    []string{"12345", "23456"},
 		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.description, func(t *testing.T) {
-			actual := sortCards(tt.lines)
-
-			for i := 0; i < len(tt.expected); i++ {
-				if tt.expected[i] != actual[i] {
-					t.Errorf("sortCards() = %v, want %v", actual, tt.expected)
-				}
-			}
-		})
-	}
-}
-
-func TestSortCardsForPart2(t *testing.T) {
-	tests := []struct {
-		description string
-		lines       []string
-		expected    []string
-	}{
 		{
-			description: "Test 1",
+			description: "Test 4",
 			lines:       []string{"T55J5", "KTJJT", "QQQJA"},
+			sortOrder:   sortOrderPart2,
 			expected:    []string{"T55J5", "QQQJA", "KTJJT"},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.description, func(t *testing.T) {
-			actual := sortCardsForPart2(tt.lines)
+			actual := sortCards(tt.lines, tt.sortOrder)
 
 			for i := 0; i < len(tt.expected); i++ {
 				if tt.expected[i] != actual[i] {
-					t.Errorf("sortCardsForPart2() = %v, want %v", actual, tt.expected)
+					t.Errorf("sortCards() = %v, want %v", actual, tt.expected)
 				}
 			}
 		})

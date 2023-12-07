@@ -4,9 +4,7 @@ import (
 	"bufio"
 	"github.com/mariamihai/advent-of-code/util"
 	"github.com/samber/lo"
-	"sort"
 	"strings"
-	"unicode"
 )
 
 func identifyTypeForPart2(handAsString string) int {
@@ -126,7 +124,7 @@ func Problem2(filename string) int {
 	cnt := 1
 
 	for i := 0; i <= 6; i++ {
-		allCards[i] = sortCardsForPart2(allCards[i])
+		allCards[i] = sortCards(allCards[i], sortOrderPart2)
 
 		for j := 0; j < len(allCards[i]); j++ {
 			bid := util.StringToInt(strings.Split(allCards[i][j], " ")[1])
@@ -136,92 +134,4 @@ func Problem2(filename string) int {
 	}
 
 	return result
-}
-
-func sortCardsForPart2(lines []string) []string {
-	sort.Slice(lines, func(i, j int) bool {
-		card1 := strings.Split(lines[i], " ")[0]
-		card2 := strings.Split(lines[j], " ")[0]
-
-		for i := 0; i < 5; i++ {
-			rune1 := rune(card1[i])
-			rune2 := rune(card2[i])
-
-			string1 := string(card1[i])
-			string2 := string(card2[i])
-
-			isDigit1 := unicode.IsDigit(rune1)
-			isDigit2 := unicode.IsDigit(rune2)
-
-			if rune1 == rune2 {
-				continue
-			}
-			// --- Change from part 1
-			if rune1 == 'J' {
-				return true
-			}
-			if rune2 == 'J' {
-				return false
-			}
-			// ----------------------
-
-			if !isDigit1 && isDigit2 {
-				return false
-			}
-			if isDigit1 && !isDigit2 {
-				return true
-			}
-
-			if isDigit1 && isDigit2 {
-				if util.StringToInt(string1) == util.StringToInt(string2) {
-					continue
-				}
-				return util.StringToInt(string1) < util.StringToInt(string2)
-			}
-
-			if !isDigit1 && !isDigit2 {
-				if rune1 == rune2 {
-					continue
-				}
-
-				// A, K, Q, J, T
-				// Compare A with anything else
-				if rune1 == 'A' && rune2 != 'A' {
-					return false
-				}
-				if rune1 != 'A' && rune2 == 'A' {
-					return true
-				}
-
-				// Compare T with anything else
-				if rune1 == 'T' && rune2 != 'T' {
-					return true
-				}
-				if rune1 != 'T' && rune2 == 'T' {
-					return false
-				}
-
-				// Compare K with anything else
-				if rune1 == 'K' {
-					return false
-				}
-				if rune2 == 'K' {
-					return true
-				}
-
-				// Compare Q with anything else
-				if rune1 == 'Q' {
-					return false
-				}
-				if rune2 == 'Q' {
-					return true
-				}
-
-				// Remaining J against T, already done
-			}
-		}
-		return false // equal
-	})
-
-	return lines
 }
