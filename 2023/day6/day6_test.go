@@ -35,12 +35,12 @@ func TestProblem2(t *testing.T) {
 		expected    int
 	}{
 		{
-			description: "Should validate PROBLEM 1 against provided EXAMPLE",
+			description: "Should validate PROBLEM 2 against provided EXAMPLE",
 			filename:    "example1.txt",
 			expected:    71503,
 		},
 		{
-			description: "Should validate PROBLEM 1 against provided INPUT",
+			description: "Should validate PROBLEM 2 against provided INPUT",
 			filename:    "input1.txt",
 			expected:    42948149,
 		},
