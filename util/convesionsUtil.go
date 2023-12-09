@@ -35,3 +35,13 @@ func StringToIntSlice(str string) []int {
 		return result
 	})
 }
+
+func StringSliceToIntSlice(input []string) []int {
+	return lo.Map(input, func(x string, index int) int {
+		result, err := strconv.Atoi(x)
+		if err != nil {
+			return 0
+		}
+		return result
+	})
+}
