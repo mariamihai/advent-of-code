@@ -1,4 +1,4 @@
-package day6
+package day9
 
 import "testing"
 
@@ -9,14 +9,14 @@ func TestProblem1(t *testing.T) {
 		expected    int
 	}{
 		{
-			description: "Should validate PROBLEM 1 against provided EXAMPLE",
+			description: "Should validate PROBLEM 1 against provided EXAMPLE 1",
 			filename:    "example1.txt",
-			expected:    288,
+			expected:    114,
 		},
 		{
 			description: "Should validate PROBLEM 1 against provided INPUT",
 			filename:    "input1.txt",
-			expected:    227850,
+			expected:    1641934234,
 		},
 	}
 	for _, tt := range tests {
@@ -35,14 +35,14 @@ func TestProblem2(t *testing.T) {
 		expected    int
 	}{
 		{
-			description: "Should validate PROBLEM 2 against provided EXAMPLE",
-			filename:    "example1.txt",
-			expected:    71503,
+			description: "Should validate PROBLEM 2 against provided EXAMPLE 2",
+			filename:    "example2.txt",
+			expected:    5,
 		},
 		{
 			description: "Should validate PROBLEM 2 against provided INPUT",
 			filename:    "input1.txt",
-			expected:    42948149,
+			expected:    975,
 		},
 	}
 	for _, tt := range tests {

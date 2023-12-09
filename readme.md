@@ -11,6 +11,8 @@
 - [ ] Day  5 [problem](https://adventofcode.com/2023/day/5) and [solution](2023/day5) (TODO - part 2)
 - [x] Day  6 [problem](https://adventofcode.com/2023/day/6) and [solution](2023/day6)
 - [x] Day  7 [problem](https://adventofcode.com/2023/day/7) and [solution](2023/day7)
+- [x] Day  8 [problem](https://adventofcode.com/2023/day/8) and [solution](2023/day8)
+- [x] Day  9 [problem](https://adventofcode.com/2023/day/9) and [solution](2023/day9)
 
 # 2022
 
