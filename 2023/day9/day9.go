@@ -58,17 +58,17 @@ func areAllValuesTheSame(line []int) bool {
 }
 
 // resultForLine generic implementation for both problems
-func resultForLine(line []int, getCurrentValue func(line []int) int, result func(a, b int) int) int {
+func resultForLine(line []int, getValue func(line []int) int, result func(a, b int) int) int {
 	if areAllValuesTheSame(line) {
 		return line[0]
 	}
 
-	currentValue := getCurrentValue(line)
+	value := getValue(line)
 	for i := 0; i < len(line)-1; i++ {
 		line[i] = line[i+1] - line[i]
 	}
 
-	return result(currentValue, resultForLine(line[:len(line)-1], getCurrentValue, result))
+	return result(value, resultForLine(line[:len(line)-1], getValue, result))
 }
 
 // resultForLinePart1 first implementation for problem 1
@@ -77,12 +77,12 @@ func resultForLinePart1(line []int) int {
 		return line[0]
 	}
 
-	currentValue := line[len(line)-1]
+	value := line[len(line)-1]
 	for i := 0; i < len(line)-1; i++ {
 		line[i] = line[i+1] - line[i]
 	}
 
-	return currentValue + resultForLinePart1(line[:len(line)-1])
+	return value + resultForLinePart1(line[:len(line)-1])
 }
 
 // resultForLinePart2 first implementation for problem 2
@@ -91,10 +91,10 @@ func resultForLinePart2(line []int) int {
 		return line[0]
 	}
 
-	currentValue := line[0]
+	value := line[0]
 	for i := 0; i < len(line)-1; i++ {
 		line[i] = line[i+1] - line[i]
 	}
 
-	return currentValue - resultForLinePart2(line[:len(line)-1])
+	return value - resultForLinePart2(line[:len(line)-1])
 }
