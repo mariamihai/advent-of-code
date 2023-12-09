@@ -4,15 +4,15 @@
 
 🎄✨🎁 [AoC 2023](https://adventofcode.com/2023/):
 
-- [x] Day  1 [problem](https://adventofcode.com/2023/day/1) and [solution](2023/day1)
-- [x] Day  2 [problem](https://adventofcode.com/2023/day/2) and [solution](2023/day2)
-- [ ] Day  3 [problem](https://adventofcode.com/2023/day/3) and [solution](2023/day3) (TODO - part 2)
-- [x] Day  4 [problem](https://adventofcode.com/2023/day/4) and [solution](2023/day4)
-- [ ] Day  5 [problem](https://adventofcode.com/2023/day/5) and [solution](2023/day5) (TODO - part 2)
-- [x] Day  6 [problem](https://adventofcode.com/2023/day/6) and [solution](2023/day6)
-- [x] Day  7 [problem](https://adventofcode.com/2023/day/7) and [solution](2023/day7)
-- [x] Day  8 [problem](https://adventofcode.com/2023/day/8) and [solution](2023/day8)
-- [x] Day  9 [problem](https://adventofcode.com/2023/day/9) and [solution](2023/day9)
+✔️ ✔️ Day  1 [problem](https://adventofcode.com/2023/day/1) and [solution](2023/day1) </br>
+✔️ ✔️ Day  2 [problem](https://adventofcode.com/2023/day/2) and [solution](2023/day2) </br>
+✔️ ✖️ Day  3 [problem](https://adventofcode.com/2023/day/3) and [solution](2023/day3) </br>
+✔️ ✔️ Day  4 [problem](https://adventofcode.com/2023/day/4) and [solution](2023/day4) </br>
+✔️ ✖️ Day  5 [problem](https://adventofcode.com/2023/day/5) and [solution](2023/day5) </br>
+✔️ ✔️ Day  6 [problem](https://adventofcode.com/2023/day/6) and [solution](2023/day6) </br>
+✔️ ✔️ Day  7 [problem](https://adventofcode.com/2023/day/7) and [solution](2023/day7) </br>
+✔️ ✔️ Day  8 [problem](https://adventofcode.com/2023/day/8) and [solution](2023/day8) </br>
+✔️ ✔️ Day  9 [problem](https://adventofcode.com/2023/day/9) and [solution](2023/day9) </br>
 
 # 2022
 
