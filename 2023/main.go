@@ -2,13 +2,19 @@ package main
 
 import (
 	"fmt"
-	"github.com/mariamihai/advent-of-code/2023/day9"
+	"github.com/mariamihai/advent-of-code/2023/day10"
 )
 
 func main() {
-	fmt.Println("\n------- Day 9: Mirage Maintenance -------")
-	fmt.Println("Day 9, problem 1: ", day9.Problem1("./day9/input1.txt"))
-	fmt.Println("Day 9, problem 2: ", day9.Problem2("./day9/input1.txt"))
+	fmt.Println("\n------- Day 10: Pipe Maze -------")
+	//fmt.Println("Day 10, problem 1: ", day10.Problem1("./day10/example1.txt"))
+	fmt.Println("Day 10, problem 1: ", day10.Problem1("./day10/example11.txt"))
+	//fmt.Println("Day 10, problem 1: ", day10.Problem1("./day10/example2.txt"))
+	//fmt.Println("Day 10, problem 1: ", day10.Problem1("./day10/input1.txt"))
+
+	//fmt.Println("\n------- Day 9: Mirage Maintenance -------")
+	//fmt.Println("Day 9, problem 1: ", day9.Problem1("./day9/input1.txt"))
+	//fmt.Println("Day 9, problem 2: ", day9.Problem2("./day9/input1.txt"))
 
 	//fmt.Println("\n------- Day 8: Haunted Wasteland -------")
 	//fmt.Println("Day 8, problem 1: ", day8.Problem1("./day8/input1.txt"))
@@ -32,7 +38,7 @@ func main() {
 
 	//fmt.Println("\n------- Day 3: Gear Ratios -------")
 	//fmt.Println("Day 3, problem 1: ", day3.Problem1("./day3/input1.txt"))
-	//fmt.Println("Day 2, problem 2: ", day3.Problem2("./day3/input1.txt"))
+	//fmt.Println("Day 3, problem 2: ", day3.Problem2("./day3/input1.txt"))
 
 	//fmt.Println("\n------- Day 2: Cube Conundrum -------")
 	//fmt.Println("Day 2, problem 1: ", day2.Problem1("./day2/input1.txt"))
