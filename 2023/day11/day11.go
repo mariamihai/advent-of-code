@@ -23,7 +23,7 @@ func isGalaxy(inputPosition string) bool {
 	return inputPosition == "#"
 }
 
-func getAllGalaxies(input map[int][]string) []Point {
+func getAllGalaxies(input [][]string) []Point {
 	galaxies := []Point{}
 
 	for i := 0; i < len(input); i++ {
@@ -53,23 +53,49 @@ func Problem1(filename string) int {
 	return result / 2
 }
 
-func getInputWithDuplicateEmptyRowsPart1(filename string) map[int][]string {
+func getInputWithDuplicateEmptyRowsPart1(filename string) [][]string {
 	file := util.ReadFile(filename)
 	defer util.CloseFile()(file)
 
-	input := make(map[int][]string)
-	var cnt int
+	var input [][]string
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		input[cnt] = strings.Split(scanner.Text(), "")
+		line := strings.Split(scanner.Text(), "")
+		input = append(input, line)
 
 		// Add a second empty row if one is found
-		if isEmptyRow(input[cnt]) {
-			cnt++
-			input[cnt] = input[cnt-1]
+		if isEmptyRow(line) {
+			input = append(input, line)
 		}
-		cnt++
+	}
+
+	return input
+}
+
+func getMapWithDuplicateEmptyColumnsPart1(input [][]string) [][]string {
+	var emptyColumnPositions []int
+	for j := 0; j < len(input[0]); j++ {
+		var isNotEmptyColumn bool
+
+		for i := 0; i < len(input); i++ {
+			if isGalaxy(input[i][j]) {
+				isNotEmptyColumn = true
+				break
+			}
+		}
+
+		if !isNotEmptyColumn {
+			emptyColumnPositions = append(emptyColumnPositions, j)
+		}
+	}
+
+	for i := 0; i < len(input); i++ {
+		for index, emptyPosition := range emptyColumnPositions {
+			updatedRestOfTheRow := append([]string{"."}, input[i][emptyPosition+index:len(input[i])]...)
+
+			input[i] = append(input[i][:emptyPosition+index], updatedRestOfTheRow...)
+		}
 	}
 
 	return input
@@ -91,34 +117,6 @@ func shortestPathsForGalaxyPart1(current Point, allGalaxies []Point) int {
 	return sum
 }
 
-func getMapWithDuplicateEmptyColumnsPart1(input map[int][]string) map[int][]string {
-	var toUpdate []int
-	for j := 0; j < len(input[0]); j++ {
-		var isNotEmpty bool
-
-		for i := 0; i < len(input); i++ {
-			if isGalaxy(input[i][j]) {
-				isNotEmpty = true
-				break
-			}
-		}
-
-		if !isNotEmpty {
-			toUpdate = append(toUpdate, j)
-		}
-	}
-
-	for i := 0; i < len(input); i++ {
-		for index, update := range toUpdate {
-			updatedRestOfTheRow := append([]string{"."}, input[i][update+index:len(input[i])]...)
-
-			input[i] = append(input[i][:update+index], updatedRestOfTheRow...)
-		}
-	}
-
-	return input
-}
-
 // -------------------------- Problem 2 --------------------------
 
 func Problem2(filename string, expansionMultiplier int) int {
@@ -135,19 +133,20 @@ func Problem2(filename string, expansionMultiplier int) int {
 	return result / 2
 }
 
-func getInputAndEmptyRowsPart2(filename string) (map[int][]string, []int) {
+func getInputAndEmptyRowsPart2(filename string) ([][]string, []int) {
 	file := util.ReadFile(filename)
 	defer util.CloseFile()(file)
 
-	input := make(map[int][]string)
+	var input [][]string
 	var cnt int
 	var emptyRows []int
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		input[cnt] = strings.Split(scanner.Text(), "")
+		line := strings.Split(scanner.Text(), "")
+		input = append(input, line)
 
-		if isEmptyRow(input[cnt]) {
+		if isEmptyRow(line) {
 			emptyRows = append(emptyRows, cnt)
 		}
 		cnt++
@@ -156,7 +155,7 @@ func getInputAndEmptyRowsPart2(filename string) (map[int][]string, []int) {
 	return input, emptyRows
 }
 
-func getEmptyColumnsPart2(input map[int][]string) []int {
+func getEmptyColumnsPart2(input [][]string) []int {
 	var emptyColumns []int
 
 	for j := 0; j < len(input[0]); j++ {
