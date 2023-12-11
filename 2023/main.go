@@ -2,13 +2,17 @@ package main
 
 import (
 	"fmt"
-	"github.com/mariamihai/advent-of-code/2023/day9"
+	"github.com/mariamihai/advent-of-code/2023/day11"
 )
 
 func main() {
-	fmt.Println("\n------- Day 9: Mirage Maintenance -------")
-	fmt.Println("Day 9, problem 1: ", day9.Problem1("./day9/input1.txt"))
-	fmt.Println("Day 9, problem 2: ", day9.Problem2("./day9/input1.txt"))
+	fmt.Println("\n------- Day 11: Cosmic Expansion -------")
+	fmt.Println("Day 11, problem 1: ", day11.Problem1("./day11/input1.txt"))
+	fmt.Println("Day 11, problem 2: ", day11.Problem2("./day11/input1.txt", 1000000))
+
+	//fmt.Println("\n------- Day 9: Mirage Maintenance -------")
+	//fmt.Println("Day 9, problem 1: ", day9.Problem1("./day9/input1.txt"))
+	//fmt.Println("Day 9, problem 2: ", day9.Problem2("./day9/input1.txt"))
 
 	//fmt.Println("\n------- Day 8: Haunted Wasteland -------")
 	//fmt.Println("Day 8, problem 1: ", day8.Problem1("./day8/input1.txt"))

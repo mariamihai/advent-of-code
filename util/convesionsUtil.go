@@ -45,3 +45,10 @@ func StringSliceToIntSlice(input []string) []int {
 		return result
 	})
 }
+
+func AbsInt(x, y int) int {
+	if x < y {
+		return y - x
+	}
+	return x - y
+}
