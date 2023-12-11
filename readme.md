@@ -17,7 +17,7 @@
 ✖️ ✖️ Day       10 [problem](https://adventofcode.com/2023/day/10) </br>
 ✔️ ✔️ Day       11 [problem](https://adventofcode.com/2023/day/11) and [solution](2023/day11) </br>
 
-# 2022
+## 2022
 
 🎄✨ 🎁 [AoC 2022](https://adventofcode.com/2022/):
 
@@ -32,3 +32,15 @@
 - [ ] Day  9 [problem](day9)
 - [x] Day 10 [problem](day10)
 - [x] Day 11 [problem](day11) (to refactor)
+
+## 2021
+
+🎄✨🎁 [AoC 2021](https://adventofcode.com/2021/):
+
+✔️ ✖️ Day &nbsp; 1 [problem](https://adventofcode.com/2021/day/1) and [solution](2021/day1) </br>
+✔️ ✔️ Day &nbsp; 2 [problem](https://adventofcode.com/2021/day/2) and [solution](2021/day2) </br>
+
+## Resources
+
+- 2015 - 2021 problems structured by category [here](https://www.reddit.com/r/adventofcode/comments/z0vmy0/350_stars_a_categorization_and_megaguide/)
+- 

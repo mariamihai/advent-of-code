@@ -2,37 +2,22 @@ package day2
 
 import (
 	"bufio"
-	"fmt"
-	"log"
-	"os"
-	"strconv"
+	"github.com/mariamihai/advent-of-code/util"
 	"strings"
 )
 
-func Problem1() {
-	file, err := os.Open("./day2/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
-
-	scanner := bufio.NewScanner(file)
+func Problem1(filename string) int {
+	file := util.ReadFile(filename)
+	defer util.CloseFile()(file)
 
 	var horizontalPosition = 0
 	var verticalPosition = 0 // depth
 
+	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		lineStr := scanner.Text()
+		line := strings.Split(scanner.Text(), " ")
 
-		line := strings.Split(lineStr, " ")
-
-		number := readLine(line[1])
+		number := util.StringToInt(line[1])
 		if line[0] == "forward" {
 			horizontalPosition += number
 		}
@@ -44,38 +29,24 @@ func Problem1() {
 		}
 	}
 
-	fmt.Printf("Part 1 - horizontal x depth: %d\n", horizontalPosition*verticalPosition)
+	util.Boom(scanner.Err())
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	return horizontalPosition * verticalPosition
 }
 
-func Problem2() {
-	file, err := os.Open("./day2/input2.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(file)
-
-	scanner := bufio.NewScanner(file)
+func Problem2(filename string) int {
+	file := util.ReadFile(filename)
+	defer util.CloseFile()(file)
 
 	var horizontalPosition = 0
 	var verticalPosition = 0 // depth
 	var aim = 0
 
+	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		lineStr := scanner.Text()
+		line := strings.Split(scanner.Text(), " ")
 
-		line := strings.Split(lineStr, " ")
-
-		number := readLine(line[1])
+		number := util.StringToInt(line[1])
 		if line[0] == "forward" {
 			horizontalPosition += number
 			verticalPosition += aim * number
@@ -87,19 +58,7 @@ func Problem2() {
 			aim -= number
 		}
 	}
+	util.Boom(scanner.Err())
 
-	fmt.Printf("Part 2 - horizontal x depth: %d\n", horizontalPosition*verticalPosition)
-
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
-}
-
-func readLine(str string) int {
-	currentDepth, err := strconv.Atoi(str)
-	if err != nil {
-		log.Fatal("Error during conversion")
-	}
-
-	return currentDepth
+	return horizontalPosition * verticalPosition
 }
