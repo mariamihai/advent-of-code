@@ -16,6 +16,7 @@
 ✔️ ✔️ Day &nbsp; 9 [problem](https://adventofcode.com/2023/day/9) and [solution](2023/day9) </br>
 ✖️ ✖️ Day       10 [problem](https://adventofcode.com/2023/day/10) </br>
 ✔️ ✔️ Day       11 [problem](https://adventofcode.com/2023/day/11) and [solution](2023/day11) </br>
+✔️ ✖️ Day       12 [problem](https://adventofcode.com/2023/day/12) and [solution](2023/day12) </br>
 
 ## 2022
 
@@ -43,4 +44,3 @@
 ## Resources
 
 - 2015 - 2021 problems structured by category [here](https://www.reddit.com/r/adventofcode/comments/z0vmy0/350_stars_a_categorization_and_megaguide/)
-- 
