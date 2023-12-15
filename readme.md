@@ -17,6 +17,9 @@
 ✖️ ✖️ Day       10 [problem](https://adventofcode.com/2023/day/10) </br>
 ✔️ ✔️ Day       11 [problem](https://adventofcode.com/2023/day/11) and [solution](2023/day11) </br>
 ✔️ ✖️ Day       12 [problem](https://adventofcode.com/2023/day/12) and [solution](2023/day12) </br>
+✖️ ✖️ Day       13 [problem](https://adventofcode.com/2023/day/13) </br>
+✔️ ✖️ Day       14 [problem](https://adventofcode.com/2023/day/14) </br>
+✔️ ✖️ Day       15 [problem](https://adventofcode.com/2023/day/15) and [solution](2023/day15) </br>
 
 ## 2022
 
